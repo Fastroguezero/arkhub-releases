@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ArkHub: the all-in-one ARK toolkit</title>
-<meta name="description" content="Fast loot, farming, macros, crosshair, gamma, INI presets and server info for ARK: Survival Evolved and Ascended, in one app.">
+<title>ArkHub: the free all-in-one ARK toolkit</title>
+<meta name="description" content="Free: fast loot, farming, macros, crosshair, gamma, INI presets and server info for ARK: Survival Evolved and Ascended, in one app.">
 <link rel="icon" href="favicon.png">
 <!-- Link previews (Discord, Twitter, etc.) -->
-<meta property="og:title" content="ArkHub: every ARK tool in one app">
-<meta property="og:description" content="Fast loot, farming, macros, crosshair, gamma, INI presets and server info. Free 24 h trial.">
+<meta property="og:title" content="ArkHub: every ARK tool in one free app">
+<meta property="og:description" content="Fast loot, farming, macros, crosshair, gamma, INI presets and server info. Free download.">
 <meta property="og:image" content="https://fastroguezero.github.io/arkhub-releases/img/dashboard.png">
 <meta property="og:url" content="https://fastroguezero.github.io/arkhub-releases/">
 <meta name="twitter:card" content="summary_large_image">
@@ -81,19 +81,6 @@
   .gallery img { border-radius: 12px; border: 1px solid var(--line); cursor: zoom-in; }
   .gallery figcaption { text-align: center; color: var(--muted); margin-top: 14px; font-size: 15px; }
 
-  /* pricing */
-  .prices { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); align-items: stretch; max-width: 640px; margin: 0 auto; }
-  .price { text-align: center; padding: 30px 22px; display: flex; flex-direction: column; }
-  .price.best { border-color: var(--a); box-shadow: 0 0 0 1px var(--a), 0 20px 50px -20px #3b82f688; }
-  .price .amt { font-size: 40px; font-weight: 800; margin: 10px 0 0; }
-  .price .per { color: var(--muted); font-size: 14px; margin-bottom: 16px; }
-  .price ul { list-style: none; padding: 0; margin: 0 0 22px; text-align: left; color: var(--muted); font-size: 14px; flex: 1; }
-  .price li { padding: 4px 0; }
-  .price li::before { content: "✓ "; color: var(--ok); }
-  .price .btn { justify-content: center; }
-  .tag { align-self: center; font-size: 12px; padding: 2px 10px; border-radius: 99px; background: var(--grad); color: #fff; margin-bottom: 4px; }
-  .pay { text-align: center; color: var(--muted); font-size: 13.5px; margin-top: 18px; }
-
   /* faq */
   .faq { max-width: 780px; margin: 0 auto; }
   details { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 15px 20px; margin-bottom: 10px; }
@@ -132,24 +119,23 @@
       <a class="brand" href="#"><img src="img/logo.png" alt="">ArkHub</a>
       <a class="link" href="#features">Features</a>
       <a class="link" href="#screens">Screenshots</a>
-      <a class="link" href="#pricing">Pricing</a>
       <a class="link" href="#faq">FAQ</a>
-      <a class="btn small primary" href="#pricing">Get ArkHub</a>
+      <a class="btn small primary" data-link="download" href="#">Download free</a>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
   <div class="hero">
-    <div class="pill"><b>●</b> Works with ARK: Survival Evolved &amp; Ascended</div>
+    <div class="pill"><b>●</b> 100% free · ARK: Survival Evolved &amp; Ascended</div>
     <h1>Every ARK tool you use,<br><span>in one app.</span></h1>
     <p>Fast loot, farming, macros, crosshair, gamma, INI presets, server info and more, all with one clean
       interface and global hotkeys. It replaces RazorReaper, ARK Tool and arkAIO.</p>
     <div class="ctas">
-      <a class="btn primary" href="#pricing">Get ArkHub</a>
-      <a class="btn" data-link="trial" href="#pricing">Try free for 24 h</a>
+      <a class="btn primary" data-link="download" href="#">⬇ Download free</a>
+      <a class="btn" href="#features">See features</a>
     </div>
-    <div class="trust"><span>Instant key delivery</span><span>One-click auto-updates</span><span>No game memory access</span></div>
+    <div class="trust"><span>Free, no key or account</span><span>One-click auto-updates</span><span>No game memory access</span></div>
     <div class="shot"><img src="img/dashboard.png" alt="ArkHub dashboard with on/off cards for every feature" width="1240" height="796"></div>
   </div>
 
@@ -157,8 +143,8 @@
     <h2>Up and running in 2 minutes</h2>
     <p class="sub">No installer, no setup wizard.</p>
     <div class="steps">
-      <div class="card step"><h3>Get a key</h3><p>Pick a plan or start the free trial. Your key arrives by email right away.</p></div>
-      <div class="card step"><h3>Download &amp; open</h3><p>Unzip ArkHub, open it and paste your key. It locks to your PC automatically.</p></div>
+      <div class="card step"><h3>Download</h3><p>Grab the latest version from GitHub. It's free, with no sign-up.</p></div>
+      <div class="card step"><h3>Unzip &amp; open</h3><p>Unzip the folder and open ArkHub.exe. There's no installer and nothing to set up.</p></div>
       <div class="card step"><h3>Flip a switch</h3><p>Turn features on from the dashboard, or bind them to hotkeys and use them in-game.</p></div>
     </div>
   </section>
@@ -214,41 +200,27 @@
     </figure>
   </section>
 
-  <section id="pricing">
-    <h2>One price. Yours forever.</h2>
-    <p class="sub">Try it free for 24 hours, then pay $5 once. No subscription. Your key is delivered instantly and activates the first time you use it.</p>
-    <div class="grid prices">
-      <div class="card price"><b>Trial</b><div class="amt">Free</div><div class="per">24 hours</div>
-        <ul><li>All 14 tools</li><li>No card needed</li><li>One per person</li></ul>
-        <a class="btn" data-link="trial" href="#">Start free trial</a></div>
-      <div class="card price best"><span class="tag">Best value</span><b>Lifetime</b><div class="amt">$5</div><div class="per">pay once, keep forever</div>
-        <ul><li>All 14 tools</li><li>All future updates</li><li>Discord support</li><li>Free PC transfers</li></ul>
-        <a class="btn primary" data-link="lifetime" href="#">Buy lifetime</a></div>
-    </div>
-    <p class="pay">Secure checkout · card &amp; crypto · key emailed instantly</p>
-  </section>
 
   <section id="faq">
     <h2>FAQ</h2>
     <p class="sub">Still stuck? <a data-link="discord" href="#">Ask on Discord</a>.</p>
     <div class="faq">
+      <details><summary>Is it really free?</summary><p>Yes. There's no key, no account and no subscription. Download it and use it.</p></details>
       <details><summary>Is ArkHub safe to use?</summary><p>ArkHub doesn't read or change the game's memory or files, except INI files you choose to edit, and it backs those up first. It only sends ordinary keyboard and mouse input, like you would yourself. There are no network exploits (no desync, no overcap).</p></details>
       <details><summary>Can I get banned?</summary><p>Input automation such as autoclickers, macros, anti-AFK and auto-farming <b>is against the rules on official servers and on many unofficial ones</b>. Use those features only in single-player or on servers whose rules allow macros. The visual and setup tools (crosshair, gamma, INI, launch options, server info) are generally fine, but check your server's rules. You use ArkHub at your own risk.</p></details>
+      <details><summary>What do I need?</summary><p>Windows 10 or 11. That's it.</p></details>
       <details><summary>Does it work with Survival Ascended?</summary><p>Yes. ArkHub detects both ASE and ASA installs. For the overlays (crosshair, server info), play in Windowed or Windowed Fullscreen mode.</p></details>
-      <details><summary>What do I need?</summary><p>Windows 10 or 11 and an internet connection to activate. If you lose connection, ArkHub keeps working for up to 48 hours before it needs to check your key again.</p></details>
-      <details><summary>I got a new PC. What now?</summary><p>Join the Discord and type <code>/reset</code> with your key. It unlocks the key so you can activate it on the new PC (once every 7 days).</p></details>
       <details><summary>How do updates work?</summary><p>ArkHub checks for updates on its own, shows you what's new and installs in one click. Your settings and macros are kept.</p></details>
       <details><summary>Windows says "unrecognized app". Is that normal?</summary><p>Yes. It's normal for small indie apps without an expensive code-signing certificate. Click <b>More info → Run anyway</b>. Only download ArkHub from this site.</p></details>
-      <details><summary>Refunds?</summary><p>Please try the free 24-hour trial first. Keys are digital and delivered instantly, so sales are final once a key has been activated. If ArkHub doesn't work on your PC and we can't fix it, contact us on Discord. See the <a href="terms.html">terms</a>.</p></details>
     </div>
   </section>
 
   <div class="cta-band">
     <h2>Stop juggling five ARK tools.</h2>
-    <p class="sub" style="margin-bottom:24px">Try everything free for 24 hours.</p>
+    <p class="sub" style="margin-bottom:24px">Everything in one app, free.</p>
     <div class="ctas">
-      <a class="btn primary" data-link="trial" href="#pricing">Start free trial</a>
-      <a class="btn" href="#pricing">See pricing</a>
+      <a class="btn primary" data-link="download" href="#">⬇ Download free</a>
+      <a class="btn" data-link="discord" href="#">Join the Discord</a>
     </div>
   </div>
 
@@ -262,7 +234,6 @@
     <span>
       <a href="#" data-link="download">Download</a>
       <a href="#" data-link="discord">Discord / support</a>
-      <a href="terms.html">Terms &amp; refunds</a>
     </span>
   </div>
 </footer>
@@ -270,19 +241,15 @@
 <div id="lb" role="dialog" aria-label="Screenshot"><img alt=""></div>
 
 <script>
-  // ✏️ Paste your links here. A link that's left empty is hidden, or falls back to the pricing section.
   const LINKS = {
-    trial: "",       // free trial product URL
-    lifetime: "",    // lifetime product URL
-    discord: "https://discord.gg/JZzsCtbZGf",     // Discord invite
+    discord: "https://discord.gg/JZzsCtbZGf",
     download: "https://github.com/fastroguezero/arkhub-releases/releases/latest"
   };
 
   document.querySelectorAll("[data-link]").forEach(a => {
     const url = LINKS[a.dataset.link];
     if (url) { a.href = url; a.target = "_blank"; a.rel = "noopener"; }
-    else if (a.dataset.link === "discord" || a.dataset.link === "download") a.hidden = true;
-    else a.href = "#pricing";
+    else a.hidden = true;
   });
 
   // screenshot tabs
