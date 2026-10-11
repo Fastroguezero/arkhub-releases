@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ArkHub: the all-in-one ARK toolkit</title>
+<meta name="description" content="Fast loot, farming, macros, crosshair, gamma, INI presets and server info for ARK: Survival Evolved and Ascended, in one app.">
+<link rel="icon" href="favicon.png">
+<!-- Link previews (Discord, Twitter, etc.) -->
+<meta property="og:title" content="ArkHub: every ARK tool in one app">
+<meta property="og:description" content="Fast loot, farming, macros, crosshair, gamma, INI presets and server info. Free 24 h trial.">
+<meta property="og:image" content="https://fastroguezero.github.io/arkhub-releases/img/dashboard.png">
+<meta property="og:url" content="https://fastroguezero.github.io/arkhub-releases/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#7c5cff">
+<style>
+  :root {
+    --bg: #0b0c10; --panel: #14161c; --panel2: #191c23; --line: #262a33; --text: #ecedf1; --muted: #9a9daa;
+    --a: #3b82f6; --b: #22c1ee; --grad: linear-gradient(135deg, var(--a), var(--b)); --ok: #4ade80;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 "Segoe UI", system-ui, -apple-system, sans-serif; }
+  body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background: radial-gradient(900px 500px at 50% -10%, #1d3b8a55, transparent 70%); }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+  /* nav */
+  header { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(10px); background: #0b0c10cc; border-bottom: 1px solid #ffffff0d; }
+  nav { display: flex; align-items: center; gap: 10px; height: 64px; }
+  nav .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; text-decoration: none; flex: 1; }
+  nav .brand img { width: 32px; height: 32px; border-radius: 8px; }
+  nav a.link { color: var(--muted); text-decoration: none; padding: 6px 10px; font-size: 15px; }
+  nav a.link:hover { color: var(--text); }
+
+  /* buttons */
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 10px; font-weight: 650;
+         text-decoration: none; border: 1px solid var(--line); background: var(--panel); cursor: pointer; transition: filter .15s, transform .15s; }
+  .btn:hover { filter: brightness(1.15); transform: translateY(-1px); }
+  .btn.primary { background: var(--grad); border: 0; color: #fff; }
+  .btn.small { padding: 8px 14px; font-size: 14px; }
+  [hidden] { display: none !important; }
+
+  /* hero */
+  .hero { text-align: center; padding: 72px 0 24px; }
+  .pill { display: inline-block; font-size: 13px; color: var(--muted); border: 1px solid var(--line); border-radius: 99px; padding: 4px 14px; margin-bottom: 18px; background: var(--panel); }
+  .pill b { color: var(--ok); }
+  .hero h1 { font-size: clamp(36px, 6.5vw, 64px); line-height: 1.05; margin: 0 0 18px; letter-spacing: -1px; }
+  .hero h1 span { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero p { color: var(--muted); font-size: 19px; max-width: 660px; margin: 0 auto 28px; }
+  .ctas { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .trust { display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; margin-top: 22px; color: var(--muted); font-size: 14px; }
+  .trust span::before { content: "✓ "; color: var(--ok); font-weight: 700; }
+  .shot { margin: 48px auto 0; max-width: 1000px; border-radius: 14px; border: 1px solid var(--line); overflow: hidden;
+          box-shadow: 0 30px 80px -20px #000, 0 0 0 1px #ffffff08, 0 0 120px -40px var(--a); }
+
+  /* sections */
+  section { padding: 80px 0 20px; }
+  h2 { font-size: clamp(28px, 4vw, 38px); text-align: center; margin: 0 0 8px; letter-spacing: -.5px; }
+  .sub { text-align: center; color: var(--muted); margin: 0 auto 40px; max-width: 620px; }
+  .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+  .card h3 { margin: 0 0 6px; font-size: 17px; }
+  .card p { margin: 0; color: var(--muted); font-size: 14.5px; }
+  .ico { width: 38px; height: 38px; border-radius: 10px; background: var(--grad); display: grid; place-items: center; font-size: 18px; margin-bottom: 12px; }
+  .group { color: var(--muted); font-size: 12.5px; letter-spacing: 1.5px; text-transform: uppercase; margin: 26px 0 10px; }
+
+  /* steps */
+  .steps { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); counter-reset: s; }
+  .step { position: relative; padding-top: 52px; }
+  .step::before { counter-increment: s; content: counter(s); position: absolute; top: 18px; left: 20px; width: 26px; height: 26px; border-radius: 50%;
+                  background: var(--grad); display: grid; place-items: center; font-weight: 700; font-size: 14px; }
+
+  /* gallery */
+  .tabs { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+  .tabs button { font: inherit; color: var(--muted); background: var(--panel); border: 1px solid var(--line); border-radius: 99px; padding: 7px 16px; cursor: pointer; }
+  .tabs button[aria-selected="true"] { color: #fff; background: var(--grad); border-color: transparent; }
+  .gallery figure { margin: 0 auto; max-width: 1000px; }
+  .gallery img { border-radius: 12px; border: 1px solid var(--line); cursor: zoom-in; }
+  .gallery figcaption { text-align: center; color: var(--muted); margin-top: 14px; font-size: 15px; }
+
+  /* pricing */
+  .prices { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); align-items: stretch; }
+  .price { text-align: center; padding: 30px 22px; display: flex; flex-direction: column; }
+  .price.best { border-color: var(--a); box-shadow: 0 0 0 1px var(--a), 0 20px 50px -20px #3b82f688; }
+  .price .amt { font-size: 40px; font-weight: 800; margin: 10px 0 0; }
+  .price .per { color: var(--muted); font-size: 14px; margin-bottom: 16px; }
+  .price ul { list-style: none; padding: 0; margin: 0 0 22px; text-align: left; color: var(--muted); font-size: 14px; flex: 1; }
+  .price li { padding: 4px 0; }
+  .price li::before { content: "✓ "; color: var(--ok); }
+  .price .btn { justify-content: center; }
+  .tag { align-self: center; font-size: 12px; padding: 2px 10px; border-radius: 99px; background: var(--grad); color: #fff; margin-bottom: 4px; }
+  .pay { text-align: center; color: var(--muted); font-size: 13.5px; margin-top: 18px; }
+
+  /* faq */
+  .faq { max-width: 780px; margin: 0 auto; }
+  details { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 15px 20px; margin-bottom: 10px; }
+  summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+  summary::after { content: "+"; color: var(--muted); font-size: 20px; line-height: 1; }
+  details[open] summary::after { content: "–"; }
+  details p { color: var(--muted); margin: 10px 0 0; }
+  code { background: var(--panel2); border: 1px solid var(--line); border-radius: 5px; padding: 1px 6px; font-size: 14px; }
+
+  .cta-band { margin: 80px 0 0; text-align: center; padding: 48px 20px; border-radius: 18px; border: 1px solid var(--line);
+              background: radial-gradient(600px 200px at 50% 0%, #3b82f633, transparent), var(--panel); }
+  .cta-band h2 { margin-bottom: 10px; }
+  .note { border: 1px solid #5a4a1a; background: #1a170e; color: #e7d29a; border-radius: 12px; padding: 14px 18px; font-size: 14px; margin: 40px 0 0; }
+  footer { color: var(--muted); font-size: 13.5px; padding: 36px 0 50px; margin-top: 50px; border-top: 1px solid var(--line); }
+  footer .wrap { display: flex; gap: 18px; flex-wrap: wrap; justify-content: space-between; }
+  footer a { color: var(--muted); margin-left: 16px; }
+
+  /* lightbox */
+  #lb { position: fixed; inset: 0; background: #000d; display: none; place-items: center; z-index: 50; padding: 16px; cursor: zoom-out; }
+  #lb.on { display: grid; }
+  #lb img { max-height: 92vh; border-radius: 10px; }
+
+  @media (max-width: 720px) {
+    nav a.link { display: none; }
+    .hero { padding-top: 44px; }
+    .hero p { font-size: 17px; }
+    section { padding-top: 60px; }
+    footer a { margin: 0 14px 0 0; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#"><img src="img/logo.png" alt="">ArkHub</a>
+      <a class="link" href="#features">Features</a>
+      <a class="link" href="#screens">Screenshots</a>
+      <a class="link" href="#pricing">Pricing</a>
+      <a class="link" href="#faq">FAQ</a>
+      <a class="btn small primary" href="#pricing">Get ArkHub</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <div class="pill"><b>●</b> Works with ARK: Survival Evolved &amp; Ascended</div>
+    <h1>Every ARK tool you use,<br><span>in one app.</span></h1>
+    <p>Fast loot, farming, macros, crosshair, gamma, INI presets, server info and more, all with one clean
+      interface and global hotkeys. It replaces RazorReaper, ARK Tool and arkAIO.</p>
+    <div class="ctas">
+      <a class="btn primary" href="#pricing">Get ArkHub</a>
+      <a class="btn" data-link="trial" href="#pricing">Try free for 24 h</a>
+    </div>
+    <div class="trust"><span>Instant key delivery</span><span>One-click auto-updates</span><span>No game memory access</span></div>
+    <div class="shot"><img src="img/dashboard.png" alt="ArkHub dashboard with on/off cards for every feature" width="1240" height="796"></div>
+  </div>
+
+  <section id="how">
+    <h2>Up and running in 2 minutes</h2>
+    <p class="sub">No installer, no setup wizard.</p>
+    <div class="steps">
+      <div class="card step"><h3>Get a key</h3><p>Pick a plan or start the free trial. Your key arrives by email right away.</p></div>
+      <div class="card step"><h3>Download &amp; open</h3><p>Unzip ArkHub, open it and paste your key. It locks to your PC automatically.</p></div>
+      <div class="card step"><h3>Flip a switch</h3><p>Turn features on from the dashboard, or bind them to hotkeys and use them in-game.</p></div>
+    </div>
+  </section>
+
+  <section id="features">
+    <h2>14 tools, one hotkey away</h2>
+    <p class="sub">Each tool has a step-by-step "How to use" guide built in, so you never need a YouTube tutorial.</p>
+
+    <div class="group">Config</div>
+    <div class="grid">
+      <div class="card"><div class="ico">⚙️</div><h3>INI &amp; Presets</h3><p>Engine.ini presets, graphics tweaks, FOV and a raw editor. It backs up the file before every change.</p></div>
+      <div class="card"><div class="ico">🚀</div><h3>Launch &amp; Resolution</h3><p>Launch options, stretched resolutions and window mode. Launch ARK straight from the app.</p></div>
+      <div class="card"><div class="ico">🌗</div><h3>Gamma</h3><p>Gamma1/Gamma2, console <code>gamma</code> cycling on a hotkey, and a desktop gamma boost.</p></div>
+    </div>
+
+    <div class="group">Visuals</div>
+    <div class="grid">
+      <div class="card"><div class="ico">🎯</div><h3>Crosshair</h3><p>Click-through overlay: cross, T, circle or dot, in any colour, size or opacity.</p></div>
+      <div class="card"><div class="ico">📡</div><h3>Server Info</h3><p>Player count, ping, map and who's online, with an optional on-screen overlay.</p></div>
+    </div>
+
+    <div class="group">Automation</div>
+    <div class="grid">
+      <div class="card"><div class="ico">📦</div><h3>Fast Loot</h3><p>Hold a key to open → Transfer All → close, bag after bag. Choose bags, bodies or structures.</p></div>
+      <div class="card"><div class="ico">🖱️</div><h3>Autoclicker</h3><p>Mouse or key, with interval, random jitter, click limit and hold mode.</p></div>
+      <div class="card"><div class="ico">🎬</div><h3>Macros &amp; Auto-craft</h3><p>Record or build step sequences, loop them, and give each one its own hotkey.</p></div>
+      <div class="card"><div class="ico">🪓</div><h3>Farming</h3><p>Hold attack and turn on an exo-mek, mammoth or ankylo, and stop automatically when overweight.</p></div>
+      <div class="card"><div class="ico">🍖</div><h3>Auto-Consume</h3><p>Reads your HUD and presses a hotbar key to eat, drink, heal or use an antidote.</p></div>
+      <div class="card"><div class="ico">💤</div><h3>Anti-AFK</h3><p>Crouches, jumps, looks or walks on a randomised timer.</p></div>
+    </div>
+
+    <div class="group">System</div>
+    <div class="grid">
+      <div class="card"><div class="ico">🔔</div><h3>Notifier</h3><p>Countdown timers and a screen-pixel watcher, with a sound and a Windows notification.</p></div>
+      <div class="card"><div class="ico">⌨️</div><h3>Global Hotkeys</h3><p>Keyboard combos or mouse middle / 4 / 5 for every action. They work while ARK is focused.</p></div>
+      <div class="card"><div class="ico">🔄</div><h3>Auto-Updates</h3><p>New versions install in one click and keep your settings. Every update is signed.</p></div>
+    </div>
+  </section>
+
+  <section id="screens" class="gallery">
+    <h2>See it in action</h2>
+    <p class="sub">A dark, clean interface with a guide on every page.</p>
+    <div class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-img="dashboard" data-cap="Dashboard: every feature on one screen, with an on/off switch for each">Dashboard</button>
+      <button role="tab" aria-selected="false" data-img="fast-loot" data-cap="Fast Loot: hold one key to empty bags, bodies or structures">Fast Loot</button>
+      <button role="tab" aria-selected="false" data-img="crosshair" data-cap="Crosshair: style, colour, size and position, updating live">Crosshair</button>
+      <button role="tab" aria-selected="false" data-img="macros" data-cap="Macros: record or build sequences, loop them, and bind them to hotkeys">Macros</button>
+      <button role="tab" aria-selected="false" data-img="hotkeys" data-cap="Hotkeys: a global hotkey for every action, including mouse buttons">Hotkeys</button>
+    </div>
+    <figure>
+      <img id="gimg" src="img/dashboard.png" alt="ArkHub screenshot" width="1240" height="796" loading="lazy">
+      <figcaption id="gcap">Dashboard: every feature on one screen, with an on/off switch for each</figcaption>
+    </figure>
+  </section>
+
+  <section id="pricing">
+    <h2>Simple pricing</h2>
+    <p class="sub">Every plan includes every feature and every update. Your key is delivered instantly and activates the first time you use it.</p>
+    <div class="grid prices">
+      <div class="card price"><b>Trial</b><div class="amt">Free</div><div class="per">24 hours</div>
+        <ul><li>All 14 tools</li><li>No card needed</li><li>One per person</li></ul>
+        <a class="btn" data-link="trial" href="#">Start free trial</a></div>
+      <div class="card price"><b>Week</b><div class="amt">$4.99</div><div class="per">7 days</div>
+        <ul><li>All 14 tools</li><li>All updates</li><li>Discord support</li><li>Free PC transfers</li></ul>
+        <a class="btn" data-link="week" href="#">Buy week</a></div>
+      <div class="card price best"><span class="tag">Most popular</span><b>Month</b><div class="amt">$9.99</div><div class="per">30 days</div>
+        <ul><li>All 14 tools</li><li>All updates</li><li>Discord support</li><li>Free PC transfers</li></ul>
+        <a class="btn primary" data-link="month" href="#">Buy month</a></div>
+      <div class="card price"><b>Lifetime</b><div class="amt">$29.99</div><div class="per">pay once, keep forever</div>
+        <ul><li>All 14 tools</li><li>All future updates</li><li>Discord support</li><li>Free PC transfers</li></ul>
+        <a class="btn" data-link="lifetime" href="#">Buy lifetime</a></div>
+    </div>
+    <p class="pay">Secure checkout · card &amp; crypto · key emailed instantly</p>
+  </section>
+
+  <section id="faq">
+    <h2>FAQ</h2>
+    <p class="sub">Still stuck? <a data-link="discord" href="#">Ask on Discord</a>.</p>
+    <div class="faq">
+      <details><summary>Is ArkHub safe to use?</summary><p>ArkHub doesn't read or change the game's memory or files, except INI files you choose to edit, and it backs those up first. It only sends ordinary keyboard and mouse input, like you would yourself. There are no network exploits (no desync, no overcap).</p></details>
+      <details><summary>Can I get banned?</summary><p>Input automation such as autoclickers, macros, anti-AFK and auto-farming <b>is against the rules on official servers and on many unofficial ones</b>. Use those features only in single-player or on servers whose rules allow macros. The visual and setup tools (crosshair, gamma, INI, launch options, server info) are generally fine, but check your server's rules. You use ArkHub at your own risk.</p></details>
+      <details><summary>Does it work with Survival Ascended?</summary><p>Yes. ArkHub detects both ASE and ASA installs. For the overlays (crosshair, server info), play in Windowed or Windowed Fullscreen mode.</p></details>
+      <details><summary>What do I need?</summary><p>Windows 10 or 11 and an internet connection to activate. If you lose connection, ArkHub keeps working for up to 48 hours before it needs to check your key again.</p></details>
+      <details><summary>I got a new PC. What now?</summary><p>Join the Discord and type <code>/reset</code> with your key. It unlocks the key so you can activate it on the new PC (once every 7 days).</p></details>
+      <details><summary>How do updates work?</summary><p>ArkHub checks for updates on its own, shows you what's new and installs in one click. Your settings and macros are kept.</p></details>
+      <details><summary>Windows says "unrecognized app". Is that normal?</summary><p>Yes. It's normal for small indie apps without an expensive code-signing certificate. Click <b>More info → Run anyway</b>. Only download ArkHub from this site.</p></details>
+      <details><summary>Refunds?</summary><p>Please try the free 24-hour trial first. Keys are digital and delivered instantly, so sales are final once a key has been activated. If ArkHub doesn't work on your PC and we can't fix it, contact us on Discord. See the <a href="terms.html">terms</a>.</p></details>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <h2>Stop juggling five ARK tools.</h2>
+    <p class="sub" style="margin-bottom:24px">Try everything free for 24 hours.</p>
+    <div class="ctas">
+      <a class="btn primary" data-link="trial" href="#pricing">Start free trial</a>
+      <a class="btn" href="#pricing">See plans</a>
+    </div>
+  </div>
+
+  <div class="note">⚠️ ArkHub is an independent tool and is not affiliated with or endorsed by Studio Wildcard or Snail Games.
+    ARK and ARK: Survival Ascended are trademarks of their owners. Follow the rules of the servers you play on.</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="y"></span> ArkHub</span>
+    <span>
+      <a href="#" data-link="download">Download</a>
+      <a href="#" data-link="discord">Discord / support</a>
+      <a href="terms.html">Terms &amp; refunds</a>
+    </span>
+  </div>
+</footer>
+
+<div id="lb" role="dialog" aria-label="Screenshot"><img alt=""></div>
+
+<script>
+  // ✏️ Paste your links here. A link that's left empty is hidden, or falls back to the pricing section.
+  const LINKS = {
+    trial: "",       // free trial product URL
+    week: "",        // week product URL
+    month: "",       // month product URL
+    lifetime: "",    // lifetime product URL
+    discord: "",     // Discord invite
+    download: "https://github.com/fastroguezero/arkhub-releases/releases/latest"
+  };
+
+  document.querySelectorAll("[data-link]").forEach(a => {
+    const url = LINKS[a.dataset.link];
+    if (url) { a.href = url; a.target = "_blank"; a.rel = "noopener"; }
+    else if (a.dataset.link === "discord" || a.dataset.link === "download") a.hidden = true;
+    else a.href = "#pricing";
+  });
+
+  // screenshot tabs
+  const tabs = document.querySelectorAll(".tabs button"), gimg = document.getElementById("gimg"), gcap = document.getElementById("gcap");
+  tabs.forEach(b => b.addEventListener("click", () => {
+    tabs.forEach(t => t.setAttribute("aria-selected", t === b));
+    gimg.src = `img/${b.dataset.img}.png`;
+    gcap.textContent = b.dataset.cap;
+  }));
+
+  // click a screenshot to enlarge
+  const lb = document.getElementById("lb");
+  document.querySelectorAll(".shot img, .gallery img").forEach(img =>
+    img.addEventListener("click", () => { lb.querySelector("img").src = img.src; lb.classList.add("on"); }));
+  lb.addEventListener("click", () => lb.classList.remove("on"));
+  addEventListener("keydown", e => e.key === "Escape" && lb.classList.remove("on"));
+
+  document.getElementById("y").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
