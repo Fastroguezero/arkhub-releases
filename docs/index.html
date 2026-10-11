@@ -82,7 +82,7 @@
   .gallery figcaption { text-align: center; color: var(--muted); margin-top: 14px; font-size: 15px; }
 
   /* pricing */
-  .prices { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); align-items: stretch; }
+  .prices { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); align-items: stretch; max-width: 640px; margin: 0 auto; }
   .price { text-align: center; padding: 30px 22px; display: flex; flex-direction: column; }
   .price.best { border-color: var(--a); box-shadow: 0 0 0 1px var(--a), 0 20px 50px -20px #3b82f688; }
   .price .amt { font-size: 40px; font-weight: 800; margin: 10px 0 0; }
@@ -215,21 +215,15 @@
   </section>
 
   <section id="pricing">
-    <h2>Simple pricing</h2>
-    <p class="sub">Every plan includes every feature and every update. Your key is delivered instantly and activates the first time you use it.</p>
+    <h2>One price. Yours forever.</h2>
+    <p class="sub">Try it free for 24 hours, then pay $5 once. No subscription. Your key is delivered instantly and activates the first time you use it.</p>
     <div class="grid prices">
       <div class="card price"><b>Trial</b><div class="amt">Free</div><div class="per">24 hours</div>
         <ul><li>All 14 tools</li><li>No card needed</li><li>One per person</li></ul>
         <a class="btn" data-link="trial" href="#">Start free trial</a></div>
-      <div class="card price"><b>Week</b><div class="amt">$1.49</div><div class="per">7 days</div>
-        <ul><li>All 14 tools</li><li>All updates</li><li>Discord support</li><li>Free PC transfers</li></ul>
-        <a class="btn" data-link="week" href="#">Buy week</a></div>
-      <div class="card price best"><span class="tag">Most popular</span><b>Month</b><div class="amt">$2.99</div><div class="per">30 days</div>
-        <ul><li>All 14 tools</li><li>All updates</li><li>Discord support</li><li>Free PC transfers</li></ul>
-        <a class="btn primary" data-link="month" href="#">Buy month</a></div>
-      <div class="card price"><b>Lifetime</b><div class="amt">$5</div><div class="per">pay once, keep forever</div>
+      <div class="card price best"><span class="tag">Best value</span><b>Lifetime</b><div class="amt">$5</div><div class="per">pay once, keep forever</div>
         <ul><li>All 14 tools</li><li>All future updates</li><li>Discord support</li><li>Free PC transfers</li></ul>
-        <a class="btn" data-link="lifetime" href="#">Buy lifetime</a></div>
+        <a class="btn primary" data-link="lifetime" href="#">Buy lifetime</a></div>
     </div>
     <p class="pay">Secure checkout · card &amp; crypto · key emailed instantly</p>
   </section>
@@ -254,7 +248,7 @@
     <p class="sub" style="margin-bottom:24px">Try everything free for 24 hours.</p>
     <div class="ctas">
       <a class="btn primary" data-link="trial" href="#pricing">Start free trial</a>
-      <a class="btn" href="#pricing">See plans</a>
+      <a class="btn" href="#pricing">See pricing</a>
     </div>
   </div>
 
@@ -279,8 +273,6 @@
   // ✏️ Paste your links here. A link that's left empty is hidden, or falls back to the pricing section.
   const LINKS = {
     trial: "",       // free trial product URL
-    week: "",        // week product URL
-    month: "",       // month product URL
     lifetime: "",    // lifetime product URL
     discord: "https://discord.gg/JZzsCtbZGf",     // Discord invite
     download: "https://github.com/fastroguezero/arkhub-releases/releases/latest"
